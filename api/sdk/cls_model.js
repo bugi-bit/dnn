@@ -11,32 +11,23 @@ function normalized(data){ // i & r
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
 
-
 function ArgMax(res){
     label = "NORMAL"
-    if(argMax(res) == 1) {
+    cls_data = []
+    for(i=0; i<res.length; i++){
+        cls_data[i] = res[i]
+    }
+    console.log(cls_data, argMax(cls_data));
+    
+    if(argMax(cls_data) == 1) {
         label = "OVER VOLTAGE"
-    }if(argMax(res) == 2) {
+    }if(argMax(cls_data) == 2) {
         label = "DROP VOLTAGE"
+    }if(argMax(cls_data) == 0) {
+        label = "NORMAL"
     }
     return label
-
-// function ArgMax(res){
-//     label = "NORMAL"
-//     cls_data = []
-//     for(i=0; i<res.lenght; i++){
-//         cls_data[i] = res[i]
-//     }
-//     console.log(cls_data, argMax(cls_data));
-    
-//     if(argMax(cls_data) == 1){
-//       label = "OVER VOLTAGE"
-//     }if(argMax(cls_data) == 0){
-//       label = "DROP VOLTAGE"
-//     }
-//      return label
-// }
-
+}
 async function classify(data){
     let in_dim = 4;
     
@@ -47,7 +38,7 @@ async function classify(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/bugi-bit/jst_service/main/public/cls_model/model.json';
+        const path = 'https://raw.githubusercontent.com/bugi-bit/dnn/main/public/cls_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
