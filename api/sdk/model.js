@@ -10,8 +10,8 @@ function normalized(data){ // i & r
 function denormalized(data){
     p = (data[2] - 0.842083333333333) / 0.100312447725892
     s = (data[3] - 213.504166666667 / 7.70534668288758
-         
-    return [p, s]
+    return [p, s]    
+    
 }
 
 
