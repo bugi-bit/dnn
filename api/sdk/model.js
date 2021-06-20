@@ -3,12 +3,14 @@ const tf = require('@tensorflow/tfjs-node');
 function normalized(data){ // i & r
     l = (data[0] - 213.266666666667) / 7.7072300277168
     r = (data[1] - 213.741666666667) / 7.7438012281854
+    
     return [l, r]
 }
 
 function denormalized(data){
     p = (data[2] - 0.842083333333333) / 0.100312447725892
     s = (data[3] - 213.504166666667 / 7.70534668288758
+         
     return [p, s]
 }
 
