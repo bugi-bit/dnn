@@ -5,6 +5,7 @@ function normalized(data){ // i & r
     r = (data[1] - 213.7) / 7.7
     return [i, r]
 }
+console.log(i, r);
 
 function denormalized(data){
     v = (data[0] * 0.1) + 0.8
