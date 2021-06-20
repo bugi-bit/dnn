@@ -1,12 +1,13 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    l = (data[0] - 213.267) / 7.7072300277168
-    r = (data[1] - 213.74167) / 7.7438012281854
+    r = (data[0] - 213.267) / 7.7072300277168
+    l = (data[1] - 213.74167) / 7.7438012281854
     p = (data[2] - 0.842083) / 0.100312447725892
     s = (data[3] - 213.504167 / 7.7053466828875
-         return [l, r, p, s]
+         return [r, l, p, s]
     }
+
 
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
