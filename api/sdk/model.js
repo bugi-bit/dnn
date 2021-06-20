@@ -1,16 +1,18 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    i = (data[0] - 12.585) / 6.813882
-    r = (data[1] - 51.4795) / 29.151289
+    i = (data[0] - 213.267) / 7.707
+    r = (data[1] - 213.741) / 7.743
     return [i, r]
 }
 
 function denormalized(data){
-    v = (data[0] * 552.6264) + 650.4795
-    p = (data[1] * 12153.8) + 10620.5615
+    v = (data[0] * 0.100) + 0.842
+    p = (data[1] * 7.705) + 213.504
     return [v, p]
 }
+//     p = (data[2] - 0.842) / 0.100
+//     s = (data[3] - 213.504 / 7.705
 
 
 async function predict(data){
@@ -23,7 +25,7 @@ async function predict(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/bugi-bit/jst_service/main/public/ex_model/model.json';
+        const path = 'https://raw.githubusercontent.com/bugi-bit/dnn/main/public/ex_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
