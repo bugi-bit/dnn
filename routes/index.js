@@ -13,12 +13,12 @@ router.get('/set/:i/:r/', function(req, res, next) {
   })
 });
 
-router.get('/:sel', function(req, res, next) {
+router.get('/:set', function(req, res, next) {
   if(req.params.sel == "p"){
     res.render(
       'index', 
       { 
-        title: 'DNNJS',
+        title: 'SHAPING RADIUS MONITORING',
         i: i,
         r: r
       }
