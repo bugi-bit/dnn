@@ -42,11 +42,19 @@ bot.on('message', (msg) => {
               cls_model.classify([parseFloat(s[0]),parseFloat(s[1]), parseFloat(jres1[0]),parseFloat(jres1[1])]).then((jres2) => {
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai V yang diprediksi adalah ${jres1[0]} volt`
+                    `nilai Radius Kanan ${s[0]} mm`
+        );
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai Radius Kiri ${s[1]} mm`
+        );       
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai Presure yang diprediksi adalah ${jres1[0]} kg/cm2`
         ); 
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai P yang diprediksi adalah ${jres1[1]} watt`
+                    `nilai Radius yang diprediksi adalah ${jres1[1]} mm`
         );
                  bot.sendMessage(
                     msg.chat.id,
