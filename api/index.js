@@ -36,7 +36,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/\/monitor/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `Nilai radius kanan = ${i} `
+        `Nilai radius kanan = ${i} dan kiri = ${r} `
     );   
     state = 0;
 });
