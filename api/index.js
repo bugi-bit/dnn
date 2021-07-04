@@ -10,17 +10,6 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
 
-state = 0;
-// bots
-bot.onText(/\/start/, (msg) => { 
-       bot.sendMessage(
-        msg.chat.id,
-        `hello ${msg.chat.first_name}, welcome...\n
-        click /predict`
-    );  
-    state = 0;
-});
-
 let i = 0;
 let o = 0;
 r.get('/sett/:i/:o/', function(req, res, next) {
@@ -47,13 +36,15 @@ r.get('/:sett', function(req, res, next) {
     }
   });
 
-bot.onText(/\/monitor/, (msg) => { 
-    bot.sendMessage(
-     msg.chat.id,
-     `hello ${i}, ${o} welcome...\n
-     click /predict`
- );  
- state = 0;
+state = 0;
+// bots
+bot.onText(/\/start/, (msg) => { 
+       bot.sendMessage(
+        msg.chat.id,
+        `hello ${msg.chat.first_name}, welcome...\n
+        click /predict`
+    );  
+    state = 0;
 });
 
 bot.onText(/\/predict/, (msg) => { 
@@ -78,11 +69,6 @@ bot.on('message', (msg) => {
                 bot.sendMessage(
                     msg.chat.id,
                     `nilai Radius Kanan ${i} mm`
-        );
-                
-                bot.sendMessage(
-                    msg.chat.id,
-                    `nilai Radius Kanan ${s[0]} mm`
         );
                 bot.sendMessage(
                     msg.chat.id,
