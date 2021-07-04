@@ -1,5 +1,5 @@
 var express = require('express');
-var r = express.Router();
+var e = express.Router();
 
 // load pre-trained model
 const model = require('./sdk/model.js');
@@ -9,7 +9,6 @@ const cls_model = require('./sdk/cls_model.js');
 const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
-
 state = 0;
 // bots
 bot.onText(/\/start/, (msg) => { 
@@ -30,7 +29,8 @@ bot.onText(/\/predict/, (msg) => {
 });
 bot.on('message', (msg) => {
     if(state == 1){
-        s = msg.text.split("|");   
+        s = [req.params.i, req.params.r];
+        // s = msg.text.split("|");   
         model.predict(
         [
            parseFloat(s[0]),
@@ -58,7 +58,7 @@ bot.on('message', (msg) => {
         );
                  bot.sendMessage(
                     msg.chat.id,
-                    `klasifikasi Tegangan ${jres2}`
+                    `klasifikasi Radius Shaping ${jres2}`
                      
                  );
             })
@@ -70,7 +70,7 @@ bot.on('message', (msg) => {
 })
 
 // routers
-r.get('/classify/:i/:r', function(req, res, next) {    
+e.get('/classify/:i/:r', function(req, res, next) {    
     model.predict(
         [
             parseFloat(req.params.i), // string to float
@@ -90,4 +90,4 @@ r.get('/classify/:i/:r', function(req, res, next) {
     })
 });
 
-module.exports = r;
+module.exports = e;
