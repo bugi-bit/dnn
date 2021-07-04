@@ -38,8 +38,8 @@ state = 0;
 bot.onText(/\/start/, (msg) => { 
        bot.sendMessage(
         msg.chat.id,
-        `hello ${msg.chat.first_name}, welcome...\n
-        click /predict`
+        `Hallo ${msg.chat.first_name}, Selamat datang di bot klasifikasi dan prediksi radius shaping\n
+        click /predict untuk mulai`
     );  
     state = 0;
 });
@@ -48,7 +48,7 @@ bot.onText(/\/predict/, (msg) => {
 
     bot.sendMessage(
         msg.chat.id,
-        `Masukan nilai i|v contohnya 9|9`
+        `Masukan nilai radius kanan|kiri contohnya 215|215`
     );   
     state = 1
 });
@@ -67,23 +67,23 @@ bot.on('message', (msg) => {
               cls_model.classify([parseFloat(s[0]),parseFloat(s[1]), parseFloat(jres1[0]),parseFloat(jres1[1])]).then((jres2) => {
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Radius Kanan ${s[0]} mm`
+                    `Nilai Radius Kanan ${s[0]} mm`
         );
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Radius Kiri ${s[1]} mm`
+                    `Nilai Radius Kiri ${s[1]} mm`
         );       
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Presure yang diprediksi adalah ${jres1[0]} kg/cm2`
+                    `Nilai Presure yang diprediksi adalah ${jres1[0]} kg/cm2`
         ); 
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Radius yang diprediksi adalah ${jres1[1]} mm`
+                    `Nilai Radius yang diprediksi adalah ${jres1[1]} mm`
         );
                  bot.sendMessage(
                     msg.chat.id,
-                    `klasifikasi Radius Shaping ${jres2}`
+                    `Klasifikasi Radius Shaping ${jres2}`
                      
                  );
             })
