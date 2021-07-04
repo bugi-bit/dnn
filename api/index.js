@@ -11,13 +11,13 @@ const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
 
 let i = 0;
-let r = 0;
-r.get('/set/:i/:r/', function(req, res, next) {
+let o = 0;
+r.get('/set/:i/:o/', function(req, res, next) {
   i = req.params.i;
-  r = req.params.r;
+  o = req.params.o;
   res.json({
     i:i, 
-    r:r
+    o:o
   })
 });
 
@@ -28,11 +28,11 @@ router.get('/:set', function(req, res, next) {
         { 
           title: 'SHAPING RADIUS MONITORING',
           i: i,
-          r: r
+          o: o
         }
       );
     }else{
-      res.redirect(`/api/classify/${i}/${r}`)
+      res.redirect(`/api/classify/${i}/${o}`)
     }
   });
 
@@ -50,7 +50,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/\/monitor/, (msg) => { 
     bot.sendMessage(
      msg.chat.id,
-     `hello ${i}, ${r} welcome...\n
+     `hello ${i}, ${o} welcome...\n
      click /predict`
  );  
  state = 0;
