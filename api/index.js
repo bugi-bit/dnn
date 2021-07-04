@@ -29,14 +29,13 @@ e.get('/classify/:i/:r', function(req, res, next) {
         res.json({jres, jres_})
     })
     })
+    n =  [
+        parseFloat(req.params.i), // string to float
+        parseFloat(req.params.r)
+    ]
 });
 
 module.exports = e;
-
-n =  [
-    parseFloat(req.params.i), // string to float
-    parseFloat(req.params.r)
-]
 
 state = 0;
 // bots
