@@ -22,26 +22,6 @@ bot.onText(/\/start/, (msg) => {
     );  
     state = 0;
 });
-//router2
-let i = 0;
-let r = 0;
-router.get('/set/:i/:r/', function(req, res, next) {
-  i = req.params.i;
-  r = req.params.r;
-  res.json({
-    i:i, 
-    r:r
-  })
-});
-
-bot.onText(/\/monitor/, (msg) => { 
-    bot.sendMessage(
-        msg.chat.id,
-        `Nilai radius kanan = ${i} dan kiri = ${r} `
-    );   
-    state = 0;
-});
-
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
