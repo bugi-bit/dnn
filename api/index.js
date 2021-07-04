@@ -10,9 +10,20 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
 
+state = 0;
+// bots
+bot.onText(/\/start/, (msg) => { 
+       bot.sendMessage(
+        msg.chat.id,
+        `hello ${msg.chat.first_name}, welcome...\n
+        click /predict`
+    );  
+    state = 0;
+});
+
 let i = 0;
 let o = 0;
-r.get('/set/:i/:o/', function(req, res, next) {
+r.get('/sett/:i/:o/', function(req, res, next) {
   i = req.params.i;
   o = req.params.o;
   res.json({
@@ -21,7 +32,7 @@ r.get('/set/:i/:o/', function(req, res, next) {
   })
 });
 
-r.get('/:set', function(req, res, next) {
+r.get('/:sett', function(req, res, next) {
     if(req.params.sel == "p"){
       res.render(
         'index', 
@@ -35,17 +46,6 @@ r.get('/:set', function(req, res, next) {
       res.redirect(`/api/classify/${i}/${o}`)
     }
   });
-
-state = 0;
-// bots
-bot.onText(/\/start/, (msg) => { 
-       bot.sendMessage(
-        msg.chat.id,
-        `hello ${msg.chat.first_name}, welcome...\n
-        click /predict`
-    );  
-    state = 0;
-});
 
 bot.onText(/\/monitor/, (msg) => { 
     bot.sendMessage(
