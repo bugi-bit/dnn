@@ -29,8 +29,11 @@ bot.onText(/\/predict/, (msg) => {
 });
 bot.on('message', (msg) => {
     if(state == 1){
-        s = [req.params.i, req.params.r];
-        // s = msg.text.split("|");   
+        n = [
+                parseFloat(req.params.i), // string to float
+                parseFloat(req.params.r)
+            ]
+        s = msg.text.split("|");   
         model.predict(
         [
            parseFloat(s[0]),
@@ -42,11 +45,11 @@ bot.on('message', (msg) => {
               cls_model.classify([parseFloat(s[0]),parseFloat(s[1]), parseFloat(jres1[0]),parseFloat(jres1[1])]).then((jres2) => {
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Radius Kanan ${s[0]} mm`
+                    `nilai Radius Kanan ${n[0]} mm`
         );
                 bot.sendMessage(
                     msg.chat.id,
-                    `nilai Radius Kiri ${s[1]} mm`
+                    `nilai Radius Kiri ${n[1]} mm`
         );       
                 bot.sendMessage(
                     msg.chat.id,
