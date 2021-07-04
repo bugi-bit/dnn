@@ -21,7 +21,7 @@ r.get('/set/:i/:o/', function(req, res, next) {
   })
 });
 
-router.get('/:set', function(req, res, next) {
+r.get('/:set', function(req, res, next) {
     if(req.params.sel == "p"){
       res.render(
         'index', 
