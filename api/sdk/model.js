@@ -9,7 +9,7 @@ function normalized(data){ // i & r
 
 function denormalized(data){
     v = (data[0] * 0.100312447725892) + 0.842083333333333
-    p = (data[1] * 213.504166666667) + 7.70534668288758
+    p = (data[1] * 7.76781144854453) + 213.504166666667
     return [v, p]
 }
 //     p = (data[2] - 0.842) / 0.100
