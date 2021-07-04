@@ -10,7 +10,31 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
 
+let i = 0;
+let r = 0;
+r.get('/set/:i/:r/', function(req, res, next) {
+  i = req.params.i;
+  r = req.params.r;
+  res.json({
+    i:i, 
+    r:r
+  })
+});
 
+router.get('/:set', function(req, res, next) {
+    if(req.params.sel == "p"){
+      res.render(
+        'index', 
+        { 
+          title: 'SHAPING RADIUS MONITORING',
+          i: i,
+          r: r
+        }
+      );
+    }else{
+      res.redirect(`/api/classify/${i}/${r}`)
+    }
+  });
 
 state = 0;
 // bots
@@ -22,6 +46,16 @@ bot.onText(/\/start/, (msg) => {
     );  
     state = 0;
 });
+
+bot.onText(/\/monitor/, (msg) => { 
+    bot.sendMessage(
+     msg.chat.id,
+     `hello ${i}, ${r} welcome...\n
+     click /predict`
+ );  
+ state = 0;
+});
+
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
@@ -41,6 +75,11 @@ bot.on('message', (msg) => {
             console.log(jres1);
           
               cls_model.classify([parseFloat(s[0]),parseFloat(s[1]), parseFloat(jres1[0]),parseFloat(jres1[1])]).then((jres2) => {
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai Radius Kanan ${i} mm`
+        );
+                
                 bot.sendMessage(
                     msg.chat.id,
                     `nilai Radius Kanan ${s[0]} mm`
