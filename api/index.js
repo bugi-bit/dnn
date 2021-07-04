@@ -29,10 +29,6 @@ e.get('/classify/:i/:r', function(req, res, next) {
         res.json({jres, jres_})
     })
     })
-    n =  [
-        parseFloat(req.params.i), // string to float
-        parseFloat(req.params.r)
-    ]
 });
 
 module.exports = e;
@@ -52,7 +48,7 @@ bot.onText(/\/predict/, (msg) => {
 
     bot.sendMessage(
         msg.chat.id,
-        `Masukan nilai i|v contohnya 9|9 ${n[0]}`
+        `Masukan nilai i|v contohnya 9|9`
     );   
     state = 1
 });
