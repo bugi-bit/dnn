@@ -10,6 +10,18 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
 
+//router2
+let i = 0;
+let r = 0;
+router.get('/set/:i/:r/', function(req, res, next) {
+  i = req.params.i;
+  r = req.params.r;
+  res.json({
+    i:i, 
+    r:r
+  })
+});
+
 state = 0;
 // bots
 bot.onText(/\/start/, (msg) => { 
@@ -18,6 +30,14 @@ bot.onText(/\/start/, (msg) => {
         `hello ${msg.chat.first_name}, welcome...\n
         click /predict`
     );  
+    state = 0;
+});
+
+bot.onText(/\/monitor/, (msg) => { 
+    bot.sendMessage(
+        msg.chat.id,
+        `Nilai radius kanan = ${i} `
+    );   
     state = 0;
 });
 
