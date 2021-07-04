@@ -9,6 +9,35 @@ const cls_model = require('./sdk/cls_model.js');
 const TelegramBot = require('node-telegram-bot-api');
 const token = '1825016672:AAFVtA4QKSCzQdRfOz5pYMGYACjl_8xxwS0'
 const bot = new TelegramBot(token, {polling: true});
+
+// routers
+e.get('/classify/:i/:r', function(req, res, next) {    
+    model.predict(
+        [
+            parseFloat(req.params.i), // string to float
+            parseFloat(req.params.r)
+        ]
+    ).then((jres)=>{
+        cls_model.classify(
+            [
+                parseFloat(req.params.i), // string to float
+                parseFloat(req.params.r),
+                parseFloat(jres[0]),
+                parseFloat(jres[1])
+        ]
+        ).then((jres_)=>{
+        res.json({jres, jres_})
+    })
+    })
+});
+
+module.exports = e;
+
+n =  [
+    parseFloat(req.params.i), // string to float
+    parseFloat(req.params.r)
+]
+
 state = 0;
 // bots
 bot.onText(/\/start/, (msg) => { 
@@ -21,10 +50,6 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.onText(/\/predict/, (msg) => { 
-    n = [
-        parseFloat(req.params.i), // string to float
-        parseFloat(req.params.r)
-    ]
 
     bot.sendMessage(
         msg.chat.id,
@@ -74,25 +99,4 @@ bot.on('message', (msg) => {
     }
 })
 
-// routers
-e.get('/classify/:i/:r', function(req, res, next) {    
-    model.predict(
-        [
-            parseFloat(req.params.i), // string to float
-            parseFloat(req.params.r)
-        ]
-    ).then((jres)=>{
-        cls_model.classify(
-            [
-                parseFloat(req.params.i), // string to float
-                parseFloat(req.params.r),
-                parseFloat(jres[0]),
-                parseFloat(jres[1])
-        ]
-        ).then((jres_)=>{
-        res.json({jres, jres_})
-    })
-    })
-});
 
-module.exports = e;
